@@ -1,5 +1,5 @@
 const initialState = {
-  sidebarIsShow: true,
+  sidebarIsShow: false,
   users: [],
   todos: [],
   albums: [],

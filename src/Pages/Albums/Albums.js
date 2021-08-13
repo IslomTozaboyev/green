@@ -1,5 +1,6 @@
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { LinearProgress } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -14,10 +15,13 @@ const Albums = () => {
   }, []);
 
   const data = useSelector((state) => state.albums);
+  const error = useSelector((state) => state.error);
+  const loading = useSelector((state) => state.loading);
   console.log(data);
 
   return (
     <AlbumsWrapper>
+      {(loading && <LinearProgress />) || ""}
       {(data.length > 0 && (
         <div className="row">
           <h1 className="title">Albums</h1>

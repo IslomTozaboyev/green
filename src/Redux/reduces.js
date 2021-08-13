@@ -2,6 +2,7 @@ import initialState from "./initialState";
 import {
   SET_ALBUMS,
   SET_ERROR,
+  SET_ISOPEN,
   SET_LOADING,
   SET_PHOTOS,
   SET_POSTS,
@@ -56,6 +57,9 @@ const reduces = (state = initialState, action) => {
 
     case SET_ERROR:
       return { ...state, error: true, loading: false };
+
+    case SET_ISOPEN:
+      return { ...state, sidebarIsShow: action.payload };
 
     default:
       return state;

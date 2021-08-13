@@ -11,6 +11,7 @@ const ContainerWrapper = styled.div`
     height: 100vh;
     position: sticky;
     top: 0;
+    display: none;
     ul.menu {
       li {
         a {

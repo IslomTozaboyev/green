@@ -1,4 +1,6 @@
+import { LinearProgress } from "@material-ui/core";
 import React from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Container from "../../Containers/Container/Container";
 import Albums from "../Albums/Albums";
@@ -17,15 +19,24 @@ import DashboardsWrapper from "./DashboardsWrapper";
 
 const Dashboards = () => {
   const { page } = useParams();
+
+  const loading = useSelector((state) => state.loading);
+
   return (
     <Container>
       <DashboardsWrapper>
-        {page === "home" && <Home />}
-        {page === "users" && <Users />}
-        {page === "todos" && <Todos />}
-        {page === "albums" && <Albums />}
-        {page === "photos" && <Photos />}
-        {page === "posts" && <Posts />}
+        {loading ? (
+          <LinearProgress />
+        ) : (
+          <>
+            {page === "home" && <Home />}
+            {page === "users" && <Users />}
+            {page === "todos" && <Todos />}
+            {page === "albums" && <Albums />}
+            {page === "photos" && <Photos />}
+            {page === "posts" && <Posts />}
+          </>
+        )}
       </DashboardsWrapper>
     </Container>
   );

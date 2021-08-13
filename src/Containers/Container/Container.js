@@ -12,6 +12,8 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import ContainerWrapper from "./ContainerWrapper";
 import Button from "@material-ui/core/Button";
+import { openSidebar } from "../../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const data = [
   { to: "/dashboard/home", page: "home", icon: faHome, title: "Home" },
@@ -34,9 +36,13 @@ const data = [
 
 const Container = ({ children }) => {
   const { page } = useParams();
+  const dispatch = useDispatch();
+
+  const sidebarShow = useSelector((state) => state.sidebarIsShow);
+
   return (
     <ContainerWrapper>
-      <div className="sidebar">
+      <div className={`sidebar ${sidebarShow ? "d-block" : ""}`}>
         <div className="d-flex justify-content-between align-items-center my-1">
           <img
             className="w-25"
@@ -80,7 +86,12 @@ const Container = ({ children }) => {
         <header className="px-2 py-3 shadow">
           <div className="d-flex justify-content-between align-items-center">
             <div>
-              <Button className="p-2 me-3" variant="contained" color="success">
+              <Button
+                onClick={() => openSidebar(dispatch)}
+                className="p-2 me-3"
+                variant="contained"
+                color="success"
+              >
                 <FontAwesomeIcon icon={faBars} />
               </Button>
               <img

@@ -2,6 +2,7 @@ import { getAlbums, getPhotos, getPosts, getTodos, getUsers } from "../Api";
 import {
   SET_ALBUMS,
   SET_ERROR,
+  SET_ISOPEN,
   SET_LOADING,
   SET_PHOTOS,
   SET_POSTS,
@@ -75,6 +76,13 @@ const setLoading = (dispatch) => {
 
 const setError = (dispatch) => {
   dispatch({ type: SET_ERROR });
+};
+
+let isSidebar = false;
+
+export const openSidebar = (dispatch) => {
+  const action = { type: SET_ISOPEN, payload: (isSidebar = !isSidebar) };
+  dispatch(action);
 };
 
 export {
