@@ -25,18 +25,14 @@ const Dashboards = () => {
   return (
     <Container>
       <DashboardsWrapper>
-        {loading ? (
-          <LinearProgress />
-        ) : (
-          <>
-            {page === "home" && <Home />}
-            {page === "users" && <Users />}
-            {page === "todos" && <Todos />}
-            {page === "albums" && <Albums />}
-            {page === "photos" && <Photos />}
-            {page === "posts" && <Posts />}
-          </>
-        )}
+        <>
+          {page === "home" && <Home />}
+          {page === "users" && <Users />}
+          {page === "todos" && <Todos />}
+          {page === "albums" && <Albums />}
+          {page === "photos" && <Photos />}
+          {page === "posts" && <Posts />}
+        </>
       </DashboardsWrapper>
     </Container>
   );
