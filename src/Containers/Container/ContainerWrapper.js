@@ -7,15 +7,20 @@ const ContainerWrapper = styled.div`
   .sidebar {
     width: 300px;
     padding: ${padding};
-    background-color: #fff;
+    background-color: ${(p) => p.colors.backgroundColor};
+    color: ${(p) => p.colors.color};
     height: 100vh;
     position: sticky;
     top: 0;
-    display: none;
+    overflow-y: auto;
+    transition: 0.5s;
+
+    &.show {
+      width: 100px;
+    }
     ul.menu {
       li {
         a {
-          padding: 10px 20px;
           border-radius: 15px;
           margin-bottom: 10px;
           display: block !important;
@@ -30,27 +35,39 @@ const ContainerWrapper = styled.div`
     }
   }
   .secondary {
-    background: #f2f3f5;
+    background: ${(p) => p.colors.backgroundColor};
   }
   .btnn {
     padding: 12px;
     background-color: #c8facd;
+    box-shadow: 0 0 10px ${(p) => p.colors.shadow};
+    &:hover {
+      background-color: #00ab55 !important;
+      color: white !important;
+    }
   }
   .rightside {
     flex: 1;
+    overflow-y: auto;
+    background: ${(p) => p.colors.backgroundColor};
+    transition: 0.5s;
+    .icon {
+      background: ${(p) => p.colors.backgroundColor};
+      color: ${(p) => p.colors.color};
+      box-shadow: 0 0 10px ${(p) => p.colors.shadow};
+    }
 
     header {
       position: sticky;
       top: 0;
-      background-color: #fff;
+      background: ${(p) => p.colors.backgroundColor};
+      box-shadow: 0 0 10px ${(p) => p.colors.shadow};
+      transition: 0.5s;
       z-index: 1000;
 
       .logo {
         height: 40px;
       }
-    }
-    .content {
-      padding: ${padding};
     }
   }
 `;

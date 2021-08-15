@@ -1,92 +1,102 @@
-import { getAlbums, getPhotos, getPosts, getTodos, getUsers } from "../Api";
+import {
+  getAlbums,
+  getPhotos,
+  getPosts,
+  getTodos,
+  getUsers,
+  getUsersById,
+} from "../../Api";
+import { SET_USER } from "../types";
+import { setError, setLoading } from "./globalActions";
 import {
   SET_ALBUMS,
-  SET_ERROR,
-  SET_ISOPEN,
-  SET_LOADING,
   SET_PHOTOS,
   SET_POSTS,
   SET_TODOS,
   SET_USERS,
-} from "./types";
+} from "../types";
+import { dispatch } from "../store";
 
-const setUsers = async (dispatch) => {
-  setLoading(dispatch);
+const setUsers = async () => {
+  setLoading(true);
   const res = await getUsers();
+  setLoading(false);
 
   if (res.success) {
     const action = { type: SET_USERS, payload: res.data };
     dispatch(action);
   } else {
-    setError(dispatch);
+    setError(true);
   }
 };
 
-const setTodos = async (dispatch) => {
-  setLoading(dispatch);
+const setTodos = async () => {
+  setLoading(true);
   const res = await getTodos();
+  setLoading(false);
 
   if (res.success) {
     const action = { type: SET_TODOS, payload: res.data };
     dispatch(action);
   } else {
-    setError();
+    setError(true);
   }
 };
 
-const setAlbums = async (dispatch) => {
-  setLoading(dispatch);
+const setAlbums = async () => {
+  setLoading(true);
   const res = await getAlbums();
+  setLoading(false);
 
   if (res.success) {
     const action = { type: SET_ALBUMS, payload: res.data };
     dispatch(action);
   } else {
-    setError();
+    setError(true);
   }
 };
 
-const setPhotos = async (dispatch) => {
-  setLoading(dispatch);
+const setPhotos = async () => {
+  setLoading(true);
   const res = await getPhotos();
+  setLoading(false);
 
   if (res.success) {
     const action = { type: SET_PHOTOS, payload: res.data };
     dispatch(action);
   } else {
-    setError();
+    setError(true);
   }
 };
 
-const setPosts = async (dispatch) => {
-  setLoading(dispatch);
+const setPosts = async () => {
+  setLoading(true);
   const res = await getPosts();
+  setLoading(false);
 
   if (res.success) {
     const action = { type: SET_POSTS, payload: res.data };
     dispatch(action);
   } else {
-    setError();
+    setError(true);
   }
 };
 
-const setLoading = (dispatch) => {
-  dispatch({ type: SET_LOADING });
-};
+const setUser = async (id) => {
+  setLoading();
+  const res = await getUsersById(id);
 
-const setError = (dispatch) => {
-  dispatch({ type: SET_ERROR });
-};
-
-let isSidebar = false;
-
-export const openSidebar = (dispatch) => {
-  const action = { type: SET_ISOPEN, payload: (isSidebar = !isSidebar) };
-  dispatch(action);
+  if (res.success) {
+    const action = { type: SET_USER, payload: res.data };
+    dispatch(action);
+  } else {
+    setError(true);
+  }
 };
 
 export {
   setUsers,
+  setUser,
   setLoading,
   setError,
   setTodos,

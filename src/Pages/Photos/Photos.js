@@ -1,7 +1,9 @@
 import React from "react";
+import { useContext } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPhotos } from "../../Redux/actions";
+import { setPhotos } from "../../Redux/actions/usersActions";
+import themeContext from "../../themeContext";
 import PhotosWrappper from "./PhotosWrapper";
 
 const Photos = () => {
@@ -11,10 +13,12 @@ const Photos = () => {
     setPhotos(dispatch);
   }, []);
 
-  const data = useSelector((state) => state.photos);
+  const data = useSelector((state) => state.photos.data);
+
+  const { colors } = useContext(themeContext);
 
   return (
-    <PhotosWrappper>
+    <PhotosWrappper colors={colors}>
       {(data.length > 0 && (
         <div className="photos__bg p-2 m-0">
           <div className="row">

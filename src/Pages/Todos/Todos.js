@@ -1,61 +1,47 @@
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setTodos } from "../../Redux/actions";
+import { useSelector } from "react-redux";
 import TodosWrapper from "./TodosWrapper";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import { setTodos } from "../../Redux/actions/usersActions";
+import { LinearProgress } from "@material-ui/core";
 
 const Todos = () => {
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    setTodos(dispatch);
+    setTodos();
   }, []);
 
-  const data = useSelector((state) => state.todos);
+  const data = useSelector((state) => state.todos.data);
+  const loading = useSelector((state) => state.global.loading);
 
   return (
     <TodosWrapper>
-      {(data.length > 0 && (
-        <div>
-          <h1 className="text">Todos</h1>
-          <div className="row">
-            {data.map((v) => (
-              <div className="col-12 col-sm-12 col-md-6 col-lg-4">
-                <div className="box mb-3 ">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <Button
-                      className="id mb-4"
-                      variant="contained"
-                      color="primary"
-                    >
-                      id: {v.id}
-                    </Button>
-                    <Button
-                      className="id mb-4"
-                      variant="contained"
-                      color="primary"
-                    >
-                      userId: {v.userId}
-                    </Button>
+      {" "}
+      {(loading && <LinearProgress />) ||
+        (data.length > 0 && (
+          <div>
+            <h1 className="m-3">Todos</h1>
+            <div className="">
+              <div className="small__container justify-content-center align-items-center">
+                {data.map((v) => (
+                  <div>
+                    <div class="box">
+                      <span></span>
+                      <div class="content">
+                        <h2>Card {v.id}</h2>
+                        <p className="fw-bold fs-5">{v.title}</p>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Dolores, quas.
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
                   </div>
-                  <h5 className="title">Title: {v.title}</h5>
-                  <div className="mb-5">
-                    <FontAwesomeIcon className="text-success" icon={faStar} />
-                    <FontAwesomeIcon className="text-success" icon={faStar} />
-                    <FontAwesomeIcon className="text-success" icon={faStar} />
-                    <FontAwesomeIcon className="text-success" icon={faStar} />
-                    <FontAwesomeIcon className="text-success" icon={faStar} />
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      )) ||
+        )) ||
         ""}
     </TodosWrapper>
   );

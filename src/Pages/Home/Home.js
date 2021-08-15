@@ -3,12 +3,93 @@ import HomeWrapper from "./HomeWrapper";
 import Button from "@material-ui/core/Button";
 import photo from "./../../img/photo.png";
 import photo2 from "./../../img/green.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBars,
+  faComment,
+  faMailBulk,
+  faPhotoVideo,
+  faPooStorm,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import themeContext from "../../themeContext";
+
+const datas = [
+  {
+    id: "01",
+    subtitle: "Users",
+    img: photo2,
+    desc: "Read More",
+    icon: faUser,
+    to: "/dashboard/users",
+  },
+  {
+    id: "02",
+    subtitle: "Todos",
+    img: photo2,
+    desc: "Read More",
+    icon: faComment,
+    to: "/dashboard/todos",
+  },
+  {
+    id: "03",
+    subtitle: "Albums",
+    img: photo2,
+    desc: "Read More",
+    icon: faMailBulk,
+    to: "/dashboard/albums",
+  },
+  {
+    id: "04",
+    subtitle: "Photos",
+    img: photo2,
+    desc: "Read More",
+    icon: faPhotoVideo,
+    to: "/dashboard/photos",
+  },
+  {
+    id: "05",
+    subtitle: "Posts",
+    img: photo2,
+    desc: "Read More",
+    icon: faPooStorm,
+    to: "/dashboard/posts",
+  },
+];
 
 const Home = () => {
+  const { colors } = useContext(themeContext);
   return (
-    <HomeWrapper>
+    <HomeWrapper colors={colors}>
       <div>
-        <h1 className="title my-3">Home</h1>
+        <h2 className="my-3 ms-3">Home</h2>
+        <div className="small__container justify-content-center align-items-center">
+          {datas.map((v, i) => {
+            return (
+              <div className="cards">
+                <div className="icon">{v.id}</div>
+                <div className="content">
+                  <h3 className="text">
+                    <FontAwesomeIcon
+                      className="me-2"
+                      icon={v.icon}
+                    ></FontAwesomeIcon>
+                    {v.subtitle}
+                  </h3>
+                  <Link to={v.to}>
+                    <Button className="button ">
+                      <a className="text-dark" href="#">
+                        {v.desc}
+                      </a>
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+        </div>
         <div className="box">
           <div className="row d-flex justify-content-between align-items-center">
             <div className="col-12 col-md-6 col-lg-6">
@@ -17,16 +98,18 @@ const Home = () => {
                 If you are going to use a passage of Lorem Ipsum, you need to be
                 sure there isn't anything
               </p>
-              <Button className="btnn" variant="contained" color="primary">
-                Go Now
-              </Button>
+              <div className="btn">
+                <a className="fw-bold text" href="#">
+                  Read More
+                </a>
+              </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6">
               <img className="photo" src={photo} alt="rasm" />
             </div>
           </div>
         </div>
-        <div className="row my-5">
+        <div className="row m-5">
           <div className="col-12 col-sm-12 col-md-6 col-lg-6">
             <p className="fs-4 fw-bold">Current Download</p>
             <img

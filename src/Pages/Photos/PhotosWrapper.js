@@ -1,16 +1,10 @@
 import styled from "styled-components";
 
 const PhotosWrappper = styled.div`
+  overflow-x: hidden;
   .photos__bg {
-    background-image: linear-gradient(
-      to right top,
-      #26caa5,
-      #00ce91,
-      #00d078,
-      #19d257,
-      #3fd229
-    );
-    color: white;
+    background-image: ${(p) => p.colors.backgroundImage};
+    color: ${(p) => p.colors.color};
   }
   .box {
     padding: 20px;

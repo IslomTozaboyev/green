@@ -1,8 +1,9 @@
-import { LinearProgress } from "@material-ui/core";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import Container from "../../Containers/Container/Container";
+import colors from "../../data/colors";
+import themeContext from "../../themeContext";
 import Albums from "../Albums/Albums";
 import Home from "../Home";
 import Photos from "../Photos/Photos";
@@ -11,28 +12,25 @@ import Todos from "../Todos";
 import Users from "../Users";
 import DashboardsWrapper from "./DashboardsWrapper";
 
-// const data = [
-//   { title: "home", page: <Home /> },
-//   { title: "users", page: <Users /> },
-//   { title: "todos", page: <Todos /> },
-// ];
+const data = [
+  { title: "home", page: <Home /> },
+  { title: "users", page: <Users /> },
+  { title: "todos", page: <Todos /> },
+  { title: "albums", page: <Albums /> },
+  { title: "photos", page: <Photos /> },
+  { title: "posts", page: <Posts /> },
+];
 
 const Dashboards = () => {
   const { page } = useParams();
-
-  const loading = useSelector((state) => state.loading);
+  const { colors } = useContext(themeContext);
 
   return (
     <Container>
-      <DashboardsWrapper>
-        <>
-          {page === "home" && <Home />}
-          {page === "users" && <Users />}
-          {page === "todos" && <Todos />}
-          {page === "albums" && <Albums />}
-          {page === "photos" && <Photos />}
-          {page === "posts" && <Posts />}
-        </>
+      <DashboardsWrapper colors={colors}>
+        {data.map((v, i) => {
+          return <>{page === `${v.title}` && v.page}</>;
+        })}
       </DashboardsWrapper>
     </Container>
   );
